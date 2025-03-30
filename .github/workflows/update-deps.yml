@@ -36,7 +36,7 @@ jobs:
   unity:
     name: Unity ${{ matrix.unity-prefix }} PR
     if: github.event.schedule == '0 3 * * *'
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     defaults:
       run:
         shell: pwsh

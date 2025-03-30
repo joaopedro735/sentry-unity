@@ -18,7 +18,7 @@ defaults:
 
 jobs:
   cancel-previous-workflow:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@b173b6ec0100793626c2d9e6b90435061f4fc3e5 # pin@0.11.0
@@ -46,7 +46,7 @@ jobs:
 
   build:
     name: Build - ${{ matrix.unity-version }}
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: false
       matrix:
@@ -177,7 +177,7 @@ jobs:
 
   package-validation:
     name: UPM Package validation
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -202,7 +202,7 @@ jobs:
   smoke-test-create:
     if: ${{ !startsWith(github.ref, 'refs/heads/release/') }}
     name: ${{ matrix.unity-version }} Prepare Smoke Test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [package-validation]
     strategy:
       fail-fast: false
@@ -255,7 +255,7 @@ jobs:
     if: ${{ !startsWith(github.ref, 'refs/heads/release/') }}
     name: ${{ matrix.unity-version }} ${{ matrix.platform }} Build Smoke Test
     needs: [smoke-test-create]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: false
       matrix:
@@ -584,7 +584,7 @@ jobs:
     if: ${{ !startsWith(github.ref, 'refs/heads/release/') }}
     needs: [smoke-test-build]
     name: ${{ matrix.unity-version }} ${{ matrix.platform }} Run Smoke Test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: false
       matrix:
